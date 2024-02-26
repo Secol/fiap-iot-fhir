@@ -1,0 +1,6 @@
+/env
+/postgres_data
+/grafana_data
+exemplo.json
+/data/data/mosquitto.db
+/data/log/mosquitto.log

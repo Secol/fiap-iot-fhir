@@ -1,0 +1,156 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 1,
+    "links": [],
+    "liveNow": true,
+    "panels": [
+      {
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "bbba8f7c-834a-4fe2-9ca5-33063d896fb0"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "fieldMinMax": false,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 8,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1,
+        "maxPerRow": 3,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "firstNotNull"
+            ],
+            "fields": "/^heart_beat$/",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.3.3",
+        "repeat": "PatientID",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "datasource": {
+              "type": "grafana-postgresql-datasource",
+              "uid": "bbba8f7c-834a-4fe2-9ca5-33063d896fb0"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT\r\n  record_time AS \"time\",\r\n  heart_beat\r\nFROM\r\n  patient_heart_beat_records\r\nWHERE\r\n  id_patient = $PatientID\r\nORDER BY\r\n  record_time DESC;",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "Paciente ID: $PatientID",
+        "transparent": true,
+        "type": "stat"
+      }
+    ],
+    "refresh": "5s",
+    "schemaVersion": 39,
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "bbba8f7c-834a-4fe2-9ca5-33063d896fb0"
+          },
+          "definition": "SELECT DISTINCT id_patient FROM patient_heart_beat_records ;",
+          "hide": 0,
+          "includeAll": true,
+          "multi": false,
+          "name": "PatientID",
+          "options": [],
+          "query": "SELECT DISTINCT id_patient FROM patient_heart_beat_records ;",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Batimentos cardíacos",
+    "uid": "f30bec87-8aff-4b96-82fa-a88f2a7d9e46",
+    "version": 11,
+    "weekStart": ""
+  }
