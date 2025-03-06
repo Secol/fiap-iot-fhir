@@ -1,5 +1,4 @@
 version: '3.7'
-
 services:
   mosquitto:
     image: eclipse-mosquitto:2.0.18
@@ -12,7 +11,7 @@ services:
       - ./data/log:/mosquitto/log
     restart: unless-stopped
   postgres:
-    image: postgres
+    image: postgres:13
     restart: always
     environment:
       POSTGRES_DB: iotdb
@@ -23,14 +22,14 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
   grafana:
     image: grafana/grafana
     ports:
       - "3000:3000"
     volumes:
-      - ./grafana_data:/var/lib/grafana
+      - grafana_data:/var/lib/grafana
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=password
       - GF_USERS_ALLOW_SIGN_UP=false
@@ -70,3 +69,19 @@ services:
     depends_on:
       - kafka
       - postgres
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspace:cached
+    command: sleep infinity
+    environment:
+      DB_HOST: postgres
+      MQTT_BROKER_ADDRESS: mosquitto
+
+volumes:
+  postgres_data:
+    driver: local
+  grafana_data:
+    driver: local

@@ -19,8 +19,7 @@ def create_fhir_record(measurement, device_id, measurement_type):
         "blood_pressure": {"system": "http://loinc.org", "code": "55284-4", "display": "Blood pressure systolic & diastolic", "unit": "mmHg", "system_unit": "http://unitsofmeasure.org", "code_unit": "mmHg"},
         "respiratory_rate": {"system": "http://loinc.org", "code": "9279-1", "display": "Respiratory rate", "unit": "breaths/minute", "system_unit": "http://unitsofmeasure.org", "code_unit": "breaths/min"},
         "oxygen_saturation": {"system": "http://loinc.org", "code": "59408-5", "display": "Oxygen saturation in Arterial blood", "unit": "%", "system_unit": "http://unitsofmeasure.org", "code_unit": "%"},
-        "body_temperature": {"system": "http://loinc.org", "code": "8310-5", "display": "Body temperature", "unit": "degrees Celsius", "system_unit": "http://unitsofmeasure.org", "code_unit": "Cel"}
-    }
+        "body_temperature": {"system": "http://loinc.org", "code": "8310-5", "display": "Body temperature", "unit": "degrees Celsius", "system_unit": "http://unitsofmeasure.org", "code_unit": "Cel"}    }
     if measurement_type in ["blood_pressure_systolic", "blood_pressure_diastolic"]:
         measurement_type = "blood_pressure"
     code_info = codes[measurement_type]
@@ -64,7 +63,7 @@ def simulate_iot_device(device_id):
         for measurement_type in measurements.keys():
             if measurement_type in ["blood_pressure_systolic", "blood_pressure_diastolic"]:
                 measurement = simulate_measurement(measurements[measurement_type], 60 if measurement_type == "blood_pressure_diastolic" else 90, 100 if measurement_type == "blood_pressure_diastolic" else 160)
-                topic = f"{topic_prefix}{"blood_pressure"}"
+                topic = f"{topic_prefix}"
             else:
                 measurement = simulate_measurement(measurements[measurement_type], 40 if measurement_type == "heart_rate" else 95 if measurement_type == "oxygen_saturation" else 35, 120 if measurement_type == "heart_rate" else 100 if measurement_type == "oxygen_saturation" else 40)
                 topic = f"{topic_prefix}{measurement_type}"

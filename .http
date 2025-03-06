@@ -1,6 +1,6 @@
+POST http://localhost:8083/connectors
+Content-Type: application/json
 
-
-```json
 {
   "name": "postgresql-iotdb-connector",
   "config": {
@@ -20,4 +20,7 @@
     "transforms.unwrap.drop.tombstones": "false"
   }
 }
-```
+
+###
+
+DELETE http://localhost:8083/connectors/postgresql-iotdb-connector

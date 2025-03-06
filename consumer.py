@@ -20,10 +20,10 @@ cursor = conn.cursor()
 
 # Função para inserir dados no banco
 def insert_into_db(id_patient, heart_beat, record_time):
-    sql = "INSERT INTO patient_heart_beat_records (id_patient, heart_beat, record_time) VALUES (%s, %s, %s)"
+    sql = "INSERT INTO public.patient_heart_beat_records (id_patient, heart_beat, record_time) VALUES (%s, %s, %s)"
     cursor.execute(sql, (id_patient, heart_beat, record_time))
     conn.commit()
-
+    
 # Função chamada quando o cliente recebe uma mensagem do broker
 def on_message(client, userdata, message):
     # Decodificar a mensagem recebida

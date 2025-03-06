@@ -4,3 +4,4 @@
 exemplo.json
 /data/data/mosquitto.db
 /data/log/mosquitto.log
+*.png
